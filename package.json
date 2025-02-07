@@ -1,0 +1,26 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "It is a webapp to the voice and text note",
+  "homepage": "https://github.com/sourabh945/NOTES#readme",
+  "bugs": {
+    "url": "https://github.com/sourabh945/NOTES/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sourabh945/NOTES.git"
+  },
+  "license": "ISC",
+  "author": "sourabh945 <sheokand.sourabh.anil@gamil.com>",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.10.0",
+    "pg": "^8.13.1"
+  }
+}
