@@ -4,7 +4,7 @@
 // user-db connection: I use postgresql ( in dev env )
 //
 const { Sequelize } = require("sequelize");
-const logger = require("./../utils/logging");
+const logger = require("../utils/logging");
 
 const userSequelize = new Sequelize(
   process.env.user_DB_NAME,
@@ -20,10 +20,10 @@ const userSequelize = new Sequelize(
 // checking trying to connect to the database
 // if unable to connect then shutdown the server
 (async () => {
-  logger.info("Connecting to the user database...");
+  logger.info("Test for connecting to the user database...");
   try {
     await userSequelize.authenticate();
-    logger.info("Successfully connected to user database");
+    logger.info("Successfully pass the connection test for user database");
   } catch (err) {
     logger.error(`Unable to Connect to the user database due to error ${err}`);
     process.exit(1);

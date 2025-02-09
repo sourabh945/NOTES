@@ -10,10 +10,7 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const logger = require("../utils/logging");
 const generateJWTSecret = require("../utils/keyGenerator");
-
-// there the jwt key
-//
-const JWT_SECRET = process.env.JWT_SECRET || generateJWTSecret();
+const generateJWT = require("jsonwebtoken");
 
 const router = express.Router();
 
@@ -53,13 +50,7 @@ router.post(
     }
     try {
       const user = await User.create({ username, email, name, password });
-      const token = jwt.sign(
-        { id: user.id, username: user.username },
-        JWT_SECRET,
-        {
-          expiresIn: process.env.JWT_EXPIRES_IN || "1d",
-        },
-      );
+      const token = generateJWT(user);
       res.status(201).json({ message: "User is created", token: token });
     } catch (err) {
       if (err.name === "SequelizeUniqueConstraintError") {
@@ -98,13 +89,7 @@ router.post(
     if (!(await user.correctPassword(password, user.password))) {
       return next(new AppError("Invalid Password", 401));
     }
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      JWT_SECRET,
-      {
-        expiresIn: process.env.JWT_EXPIRES_IN || "1d",
-      },
-    );
+    const token = generateJWT(user);
     res.status(200).json({ message: "User Logged In", token: token });
   }),
 );

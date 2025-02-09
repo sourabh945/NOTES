@@ -8,14 +8,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // middleware
+//
+const upload = require("./backend/middleware/upload");
 
 app.use(express.json());
+app.use(upload);
 
 // routes
 app.use("/api/v1/auth", require("./backend/routes/auth"));
 
 // databse connection
-const userDB = require("./backend/config/db");
+const userDB = require("./backend/config/user_db");
 
 // error handler middleware
 app.use(require("./backend/middleware/errorHandler"));
