@@ -2,11 +2,13 @@
 // and make sure that only operational errors are returned
 //
 class AppError extends Error {
-  constructor(msg, statusCode) {
-    super(msg);
+  constructor(message, statusCode) {
+    super(message);
     this.statusCode = statusCode;
+    this.status = `${statusCode}`.startsWith("4") ? "fail" : "error"; // 4xx for client error and 5xx for server error
     this.isOperational = true; // Make sure that error as safe
+    Error.captureStackTrace(this, this.constructor);
   }
 }
 
-module.export = AppError;
+module.exports = AppError;

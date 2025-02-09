@@ -7,7 +7,7 @@ module.exports = (err, req, res, next) => {
   if (statusCode === 500) {
     logger.error(`${err}`);
   }
-  const msg = err.isOperational ? err.msg : "Internal Server Error";
-
+  const msg = err.isOperational ? err.message : "Internal Server Error";
+  logger.error(`${msg}`);
   res.status(statusCode).json({ message: msg });
 };
