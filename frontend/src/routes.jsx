@@ -1,8 +1,8 @@
 // in this file i also write the routes for imports in other funtions
 //
-export const BASE = import.meta.env.VITE_BASE;
-export const loginRoute = BASE + "login/";
-export const signupRoute = BASE + "signup/";
+
+export const loginRoute = "/login/";
+export const signupRoute = "/signup/";
 
 //
 // end route here

@@ -12,16 +12,10 @@ const muiCache = createCache({
   prepend: true,
 });
 
-// internal started for start the internal process
-import internalStarter from "./internals/init";
-
 // import for routing
 import AppRoutes from "./routes";
 
 function App() {
-  // this function is for initialize the internal process for app and start theme
-  internalStarter();
-
   return (
     <CacheProvider value={muiCache}>
       {/* this is for caching all the thing before DOM load */}
