@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+
+// theme imports
+import { ThemeProvider } from "@mui/material";
+import * as theme from "./theme/main";
+
+// cached provider and imports
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
+const muiCache = createCache({
+  key: "mui",
+  prepend: true,
+});
+
+// internal started for start the internal process
+import internalStarter from "./internals/init";
+
+// import for routing
+import AppRoutes from "./routes";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // this function is for initialize the internal process for app and start theme
+  internalStarter();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <CacheProvider value={muiCache}>
+      {/* this is for caching all the thing before DOM load */}
+      <>
+        {/* It make the cable to change theme as the system changes */}
+        <ThemeProvider
+          theme={theme.isDarkTheme() ? theme.darkTheme : theme.lightTheme}
+        >
+          {/* Routing start*/}
+          <AppRoutes />
+          {/* Routing end */}
+        </ThemeProvider>
+      </>
+    </CacheProvider>
+  );
 }
 
-export default App
+export default App;

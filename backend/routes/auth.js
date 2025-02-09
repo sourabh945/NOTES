@@ -18,7 +18,7 @@ const router = express.Router();
 
 // this function is for register the user
 router.post(
-  "/register",
+  "/api/register",
   [
     body("username")
       .isAlphanumeric()
@@ -68,7 +68,7 @@ router.post(
 // this function is for login the user
 // this function will check the user with password and generate the jwt token for the user
 router.post(
-  "/login",
+  "/api/login",
   [
     body("identifier").isAlphanumeric().withMessage("Username is not valid"),
     body("password").notEmpty().withMessage("Password is required"),
