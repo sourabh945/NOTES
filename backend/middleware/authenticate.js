@@ -17,3 +17,5 @@ const authenticate = (req, res, next) => {
     return next(new AppError("Invalid Token", 401));
   }
 };
+
+module.exports = authenticate;
